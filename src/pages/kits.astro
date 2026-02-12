@@ -1,0 +1,795 @@
+---
+import Header from "../layouts/Header.astro";
+import Footer from "../layouts/Footer.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+// Datos de los kits - UN KIT POR CATEGORÍA
+const kitsData = {
+    acne: [
+        {
+            id: 'kit-antiedad',
+            title: "Kit Combinado para Acné",
+            image: "/Kitss/acne.webp",
+            description: "¡El mejor kit para el tratamiento del acné! Diseñado para tratar acné inflamatorio, comedogénico o combinado, con productos que tienen propiedades antibacterianas y antiinflamatorias potentes.",
+            products: [
+                "Kit para el acné inflamatorio",
+                "Kit para acné comedogénico (sin inflamación de la piel)",
+                "Kit para acné papular y pustuloso con elementos inflamatorios",
+                "Kit combinado para el acné (inflamatorio + comedogénico)",
+                "Kit para el acné inflamatorio para mujeres embarazadas y lactantes",
+                "Kit para cicatrices post-acné"
+            ],
+            details: [
+                {
+                    product: "Kit para el acné inflamatorio",
+                    description: "Un kit que trata el acné inflamatorio y altamente inflamatorio, las preparaciones para la piel tienen fuertes propiedades antibacterianas y antiinflamatorias. \n\n El kit contiene 5 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS",
+                        "BIO DEL ACNÉ",
+                        "GEL TRIPLE PARA EL ACNÉ",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL, no comedogénica, con tendencia al acné",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS : equilibra el nivel de grasa en la piel y permite que los ingredientes activos penetren fácilmente en la piel sin dañar la humedad natural de la piel.",
+                        "ACNE BIO – mata las bacterias de contacto y tiene un fuerte efecto antibacteriano y antiinflamatorio.",
+                        "GEL TRIPLE ACNÉ – reduce la producción de grasa subcutánea y previene brotes en el futuro.",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL . No comedogénica, con tendencia acneica: no causa comedogenicidad, no obstruye los poros y es adecuada para el tratamiento de pieles problemáticas. Con tendencia acneica.",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA – Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin activar el proceso inflamatorio en el acné inflamatorio. Elimina las molestias de la piel inflamada."
+                    ]
+                },
+                {
+                    product: "Kit para acné comedogénico",
+                    description: "Un kit de cuidado que contiene preparaciones que abren los poros obstruidos, rejuvenecen la piel y exfolian una fina capa para lograr una piel suave y sin acné. \n\n El kit contiene 5 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS",
+                        "LÍQUIDO REPARADOR",
+                        "GEL TRIPLE PARA EL ACNÉ",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL, no comedogénica, con tendencia al acné",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS : equilibra el nivel de grasa en la piel y permite que los ingredientes activos penetren fácilmente en la piel sin dañar la humedad natural de la piel.",
+                        "LÍQUIDO REPARADOR – Trata los comedones blancos y negros, exfolia una fina capa de piel (exfoliación suave), elimina las células cutáneas correspondientes y reduce la producción de grasa subcutánea.",
+                        "GEL TRIPLE ACNÉ – reduce la producción de grasa subcutánea y previene brotes en el futuro.",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL . No comedogénica, con tendencia acneica: no causa comedogenicidad, no obstruye los poros y es adecuada para el tratamiento de pieles problemáticas. Con tendencia acneica.",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA – Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin activar el proceso inflamatorio en el acné inflamatorio. Elimina las molestias de la piel inflamada."
+                    ]
+                },
+                {
+                    product: "Kit para acné papular y pustuloso con elementos inflamatorios",
+                    description: "Un kit de cuidado que contiene preparados que abren los poros obstruidos, rejuvenecen la piel, exfoliando una fina capa para lograr la suavidad de la piel sin acné. \n\n El kit contiene 5 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS",
+                        "BIO DEL ACNÉ",
+                        "SUPER LÍQUIDO",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL, no comedogénica, con tendencia al acné",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en la piel sin dañar su hidratación natural. Especialmente indicada para pieles con tono desigual.",
+                        "ACNE BIO – mata las bacterias de contacto, tiene un fuerte efecto antibacteriano y antiinflamatorio.",
+                        "SUPER LÍQUIDO – Trata rápidamente los quistes, seca las heridas activas por encima y por debajo de la piel y reduce la producción de sebo.",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL. No comedogénica, con tendencia acneica: no causa comedogenicidad, no obstruye los poros y es adecuada para el tratamiento de pieles problemáticas. Con tendencia acneica.",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA – Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin activar el proceso inflamatorio en el acné inflamatorio. Elimina las molestias de la piel inflamada."
+                    ]
+                },
+                {
+                    product: "Kit combinado para el acné (inflamatorio + comedogénico)",
+                    description: "¡El mejor kit para el tratamiento del acné! ¡Te ofrece más resultados, mayor control, resultados más rápidos y mayores beneficios! Un kit diseñado para tratar el acné inflamatorio, comedogénico o combinado. Con las instrucciones de uso adecuadas, puedes enfocarte en el nivel de tratamiento para el acné inflamatorio o comedogénico. \n\n El kit contiene 6 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS",
+                        "LÍQUIDO REPARADOR",
+                        "BIO DEL ACNÉ",
+                        "GEL TRIPLE PARA EL ACNÉ",
+                        "BIO ULTRA – CREMA CALMANTE",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL, no comedogénica, con tendencia al acné",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en la piel sin dañar su hidratación natural. Especialmente indicada para pieles con tono desigual.",
+                        "LÍQUIDO REPARADOR – Trata los comedones blancos y negros, exfolia una fina capa de piel (exfoliación suave), elimina las células cutáneas correspondientes y reduce la producción de sebo.",
+                        "ACNE BIO – mata las bacterias de contacto, tiene un fuerte efecto antibacteriano y antiinflamatorio.",
+                        "GEL TRIPLE ACNÉ – reduce la producción de grasa subcutánea y previene brotes en el futuro.",
+                        "BIO ULTRA – CREMA CALMANTE – Efecto sedante instantáneo fuerte y efectivo para enrojecimiento, alergias y sequedad excesiva.",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL. No comedogénica, con tendencia acneica: no causa comedogenicidad, no obstruye los poros y es adecuada para el tratamiento de pieles problemáticas. Con tendencia acneica."
+                    ]
+                },
+                {
+                    product: "Kit para el acné inflamatorio para mujeres embarazadas y lactantes",
+                    description: "Un kit de cuidado que contiene preparaciones que abren los poros obstruidos, rejuvenecen la piel y exfolian una fina capa para lograr una piel suave y sin acné. \n\n El kit contiene 5 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS",
+                        "SUPER LÍQUIDO",
+                        "GEL TRIPLE PARA EL ACNÉ",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "LIMPIADOR PROFUNDO PARA PIELES PROBLEMÁTICAS : equilibra el nivel de grasa en la piel y permite que los ingredientes activos penetren fácilmente en la piel sin dañar la humedad natural de la piel.",
+                        "SUPER LÍQUIDO – Trata rápidamente los quistes, seca las heridas activas por encima y por debajo de la piel y reduce la producción de sebo.",
+                        "GEL TRIPLE ACNÉ – reduce la producción de grasa subcutánea y previene brotes en el futuro.",
+                        "HIDRATACIÓN PROFUNDA Y FPS 25 PARA PIEL GRASA A NORMAL . No comedogénica, con tendencia acneica: no causa comedogenicidad, no obstruye los poros y es adecuada para el tratamiento de pieles problemáticas. Con tendencia acneica.",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA – Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin activar el proceso inflamatorio en el acné inflamatorio. Elimina las molestias de la piel inflamada."
+                    ]
+                },
+                {
+                    product: "Kit para cicatrices post-acné",
+                    description: "Kit para el tratamiento del post-acné, arritmias e hiperpigmentaciones. \n\n El Kit contiene 5 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "CREMA GALA + ÁCIDO HIALURÓNICO",
+                        "TOTAL REPAIR FORTE – crema reparadora y reforzadora",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en la piel sin dañar su hidratación natural. Especialmente indicada para pieles con tono desigual.",
+                        "CREMA GALA + ÁCIDO HIALURÓNICO – Rejuvenecimiento cutáneo e hidratación profunda. Este preparado activo reestructura la textura de la piel y promueve la formación de nuevas fibras de colágeno que le dan un aspecto más saludable. Rejuvenecimiento cutáneo gracias a la incorporación de ácido glicólico al 10% e hidratación profunda gracias al ácido hialurónico en cápsulas.",
+                        "TOTAL REPAIR FORTE – crema reparadora y potenciadora – Un preparado innovador con un efecto extraordinario en la renovación de la piel, con resultados comprobados y seguros. Gracias a una nueva combinación de ingredientes únicos, el preparado mejora significativamente la apariencia de la piel, suaviza las arrugas y la fortalece, elimina el acné, neutraliza los radicales libres, proporciona una renovación cutánea instantánea, una ligera elasticidad, un ligero tono rosado y deja la piel con un aspecto radiante y fresco. Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo, la textura y las cicatrices (traumáticas y postacné).",
+                        "HIDRATANTE BLOCK FPS 50 CON PROTECTOR SOLAR : Este producto filtra los rayos UVB dañinos que causan quemaduras y el daño causado por el envejecimiento prematuro de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas.",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA – Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin provocar la activación del proceso inflamatorio en el acné inflamatorio. Elimina las molestias de la piel inflamada."
+                    ]
+                }
+            ]
+        }
+    ],
+    antiaging: [
+        {
+            title: "Kit Anti-Edad",
+            image: "/Kitss/antienvejecimiento.webp",
+            description: "Un kit premium para prevenir arrugas, renovar y fortalecer la piel con fórmula reforzada y serums de última tecnología.",
+            products: [
+                "Kit antiedad para piel normal y seca",
+                "Kit Antiedad Forte",
+                "Kit VIP Antiedad",
+                "Kit de verano antiedad",
+            ],
+            details: [
+                {
+                    product: "Kit antiedad para piel normal y seca",
+                    description: "Un kit para prevenir arrugas, rejuvenecer y fortalecer la piel. \n\n El kit contiene 4 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "TOTAL REPAIR Rx – crema reparadora de noche",
+                        "CREMA RECUPERADORA MICROPEEL, crema de día",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en la piel sin dañar su hidratación natural. Prepara la piel para la acción de los peroratos e ingredientes activos posteriores.",
+                        "TOTAL REPAIR Rx – Crema reparadora de noche. Una preparación innovadora que tiene un efecto increíble en la renovación de la piel con resultados comprobados y seguros. Gracias a una nueva combinación de ingredientes únicos, el producto mejora significativamente la apariencia de la piel, alisando las arrugas y fortaleciéndola, eliminando el acné, neutralizando los radicales libres, proporcionando una renovación cutánea instantánea, una ligera elasticidad y un ligero tono rosado, dejando la piel con un aspecto radiante, fresco y juvenil. ¡Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo!",
+                        "CREMA RECUPERADORA MICROPEEL – crema restauradora de día – Esta crema está diseñada para rejuvenecer la piel. Gracias a una tecnología única, elimina las células muertas, dejando la piel renovada, más sana y joven, y estimula la regeneración celular. Aporta una luminosidad radiante a la piel del rostro. ¡Apto para todo tipo de piel!",
+                        "HIDRATANTE BLOCK FPS 50 CON PROTECTOR SOLAR : Este producto filtra los rayos UVB dañinos que causan quemaduras y el daño causado por el envejecimiento prematuro de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas."
+                    ]
+                },
+                {
+                    product: "Kit Antiedad Forte",
+                    description: "Un kit para prevenir arrugas, renovar y fortalecer la piel, ¡con una fórmula reforzada y segura! \n\n El kit contiene 4 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL",
+                        "REPARACIÓN TOTAL FORTE",
+                        "CREMA RECUPERADORA MICROPEEL",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL : Una espuma que limpia a fondo la piel del rostro y permite que los ingredientes activos penetren fácilmente en profundidad sin dañar su hidratación natural. Prepara la piel para la acción de los peroratos e ingredientes activos posteriores.",
+                        "CREMA RECUPERADORA MICROPEEL – crema de día restauradora – Esta crema está diseñada para rejuvenecer la piel. Gracias a una tecnología única, elimina las células muertas, dejando la piel más joven y sana, estimulando la regeneración celular. Aporta una luminosidad radiante al rostro. ¡Apto para todo tipo de piel!",
+                        "TOTAL REPAIR FORTE – crema reparadora y potenciadora – Un producto innovador con un efecto extraordinario en la renovación de la piel, con resultados comprobados y seguros. Gracias a una nueva combinación de ingredientes únicos, este producto mejora significativamente la apariencia de la piel, suavizando las arrugas y fortaleciéndola, eliminando el acné, neutralizando los radicales libres, proporcionando una renovación cutánea instantánea, una ligera elasticidad y un ligero tono rosado, dejando la piel con un aspecto radiante y fresco. Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo, la textura y las cicatrices (traumáticas y postacné).",
+                        "HIDRATANTE BLOCK FPS 50 CON PROTECTOR SOLAR : Este producto filtra los rayos UVB dañinos que causan quemaduras y el daño causado por el envejecimiento prematuro de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas."
+                    ]
+                },
+                {
+                    product: "Kit VIP Antiedad",
+                    description: "Un kit para prevenir arrugas, renovar y fortalecer la piel, ¡con una fórmula reforzada y segura! \n\n El kit contiene 6 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL",
+                        "REPARACIÓN TOTAL Rx",
+                        "CREMA RECUPERADORA MICROPEEL",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "SUERO ANTIARRUGAS DEFINITIVO",
+                        "SUERO HIDRATANTE – NUEVOS FRAGMENTOS DE ÁCIDO HIALURÓNICO",
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL : Una espuma que limpia a fondo la piel del rostro y permite que los ingredientes activos penetren fácilmente en profundidad sin dañar su hidratación natural. Prepara la piel para la acción de los peroratos e ingredientes activos posteriores.",
+                        "CREMA RECUPERADORA MICROPEEL , Crema de Día: Esta crema está diseñada para rejuvenecer la piel. Gracias a una tecnología única, elimina las células muertas, dejando la piel renovada, más sana y joven, y estimula la regeneración celular. Aporta una luminosidad radiante al rostro. ¡Apto para todo tipo de piel!",
+                        "TOTAL REPAIR Rx – Crema reparadora de noche – Un preparado innovador que tiene un efecto sorprendente en la renovación de la piel con resultados probados y seguros. Gracias a una nueva combinación de ingredientes únicos, el producto mejora significativamente la apariencia de la piel, suaviza las arrugas y la fortalece, elimina el acné, neutraliza los radicales libres, proporciona una renovación cutánea instantánea, una ligera elasticidad y un ligero tono rosado, dejándola con un aspecto radiante, fresco y juvenil. ¡Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo!",
+                        "SERUM HYDRATE – NUEVOS FRAGMENTOS DE ÁCIDO HIALURÓNICO – Proporciona hidratación interna a la piel gracias a la introducción de fragmentos de ácido hialurónico de nueva generación en pequeñas moléculas permeables. Trata las infecciones subcutáneas que causan el envejecimiento cutáneo y contiene ingredientes hidratantes adicionales que hidratan la piel.",
+                        "SUERO ANTARRUGAS DEFINITIVO : Un suero antiedad con la última tecnología, que contiene los mejores productos antiarrugas del mundo. Le da a la piel una apariencia juvenil sin precedentes, dejándola suave y agradable al tacto. Está científicamente comprobado que este suero corrige y previene la aparición de arrugas; según investigaciones, corrige aproximadamente el 70 % de la longitud y profundidad de las arrugas en 28 días.",
+                        "HIDRATANTE FPS 50 CON PROTECTOR SOLAR : Este protector solar filtra los rayos UVB dañinos que causan quemaduras, así como el daño causado por el rápido envejecimiento de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas."
+                    ]
+                },
+                {
+                    product: "Kit de verano antiedad",
+                    description: "Un kit para prevenir arrugas, renovar y fortalecer la piel, ¡con una fórmula reforzada y segura! \n\n El kit contiene 4 productos:",
+                    items: [
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL",
+                        "SUERO ANTIARRUGAS DEFINITIVO",
+                        "CREMA RECUPERADORA MICROPEEL",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "LIMPIADOR PROFUNDO PARA TODO TIPO DE PIEL : Una espuma que limpia a fondo la piel del rostro y permite que los ingredientes activos penetren fácilmente en profundidad sin dañar su hidratación natural. Prepara la piel para la acción de los peroratos e ingredientes activos posteriores.",
+                        "CREMA RECUPERADORA MICROPEEL : Esta crema está diseñada para rejuvenecer la piel. Gracias a una tecnología única, elimina las células muertas, dejando la piel renovada, más sana y joven, y estimula la regeneración celular. Aporta una luminosidad radiante a la piel del rostro. ¡Apto para todo tipo de piel!",
+                        "SUERO ANTARRUGAS DEFINITIVO : Un suero antiedad con la última tecnología, que contiene los mejores productos antiarrugas del mundo. Le da a la piel una apariencia juvenil sin precedentes, dejándola suave y agradable al tacto. Está científicamente comprobado que este suero corrige y previene la aparición de arrugas; según investigaciones, corrige aproximadamente el 70 % de la longitud y profundidad de las arrugas en 28 días.",
+                        "HIDRATANTE FPS 50 CON PROTECTOR SOLAR : Este protector solar filtra los rayos UVB dañinos que causan quemaduras, así como el daño causado por el rápido envejecimiento de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas."
+                    ]
+                }
+            ]
+        }
+    ],
+    pigmentation: [
+        {
+            title: "Kit Pigmentación 'WHITE PLUS'",
+            image: "/Kitss/pigmentacion.webp",
+            description: "El kit aclarante perfecto para tratamiento de manchas solares/hormonales y tono de piel desigual. ¡NO apto para embarazadas o en lactancia!",
+            products: [
+                "Kit de pigmentación, durante el embarazo y la lactancia",
+                "Kit para pigmentación 'WHITE PLUS'",
+                "Kit combinado para el tratamiento de arrugas y manchas (hormonal/solar)",
+                "Conjunto de manchas rojas, marrones y estancadas post acné"
+            ],
+            details: [
+                {
+                    product: "Kit de pigmentación, durante el embarazo y la lactancia",
+                    description: "Un Kit para la pigmentación o presencia de manchas para el desarrollo de un tono de piel uniforme. \n\n El kit contiene 5 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "CREMA BLANQUEADORA B",
+                        "GEL B-BLANCO",
+                        "PIGMENTO NUEVA PIEL",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en las capas profundas de la piel, sin dañar su hidratación natural. Especialmente indicada para pieles con tono desigual.",
+                        "B-WHITE CREAM – El producto más eficaz desarrollado hasta la fecha para un efecto iluminador, con 3 acciones: aclaramiento y destrucción de las manchas existentes, reducción inmediata de la producción de melanina (creadora del pigmento de la piel) y prevención de la formación de nuevas manchas.",
+                        "B-WHITE GEL – Un gel terapéutico concentrado especial, diseñado para solucionar el problema de las manchas en la piel. Tiene un doble efecto: sustancias iluminadoras y sustancias que eliminan suavemente la capa superior de la piel, incluyendo las células muertas. Deja la piel fresca, sana y con un tono uniforme.",
+                        "PIGMENTO NUEVA PIEL: Este potente supresor de melanina aclara las manchas de la piel. Apto para: durante el embarazo y la lactancia, en viajes con exposición solar intensa, antes o después de tratamientos de belleza como peelings u otros aparatos. Junto con el kit WHITE PLUS para un tratamiento de pigmentación muy intenso y para mantener el resultado. No irrita ni se descama.",
+                        "HIDRATANTE FPS 50 CON PROTECTOR SOLAR : Este protector solar filtra los rayos UVB dañinos que causan quemaduras, así como el daño causado por el rápido envejecimiento de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas."
+                    ]
+                },
+                {
+                    product: "Kit para pigmentación 'WHITE PLUS'",
+                    description: "( para tratar pigmentación solar, manchas hormonales y postacné ). \n\n Este kit no es apto para mujeres embarazadas o lactantes. \n\n El kit contiene 6 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "LÍQUIGEL BLANCO INTENSIVO",
+                        "BLANQUEADOR LÍQUIDO",
+                        "ACTIVADOR BLANCO LÍQUIGEL",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "HIDRATANTE ACTIVO / CREMA HUMECTANTE PARA PIEL NORMAL A SECA",
+                        "ESPUMA LIMPIADORA B-WHITE : Una espuma que limpia en profundidad la piel del rostro y permite que los ingredientes activos penetren fácilmente en la piel sin dañar su hidratación natural. Especialmente indicada para pieles con tono desigual.",
+                        "WHITE INTENSIVE LIQUIGEL – Tratamiento para la pigmentación de la piel causada por el sol, las hormonas y el acné. Combina ingredientes naturales y de alta tecnología. Tiene un efecto profundo en la piel y es apto para todo tipo y tono de piel. Inhibe la producción de melanina, descompone las manchas de pigmentación existentes, repara el daño solar y nutre la piel con componentes esenciales. Debe usarse en combinación con WHITE ACTIVATOR LIQUIGEL para activar sus componentes activos.",
+                        "WHITE BOOSTER LIQUIGEL – Producto innovador para tratar la pigmentación, renovando y reafirmando la piel. Suprime la producción de melanina, previene su transferencia de los melanocitos a las células y descompone las manchas existentes mediante ácidos de alta tecnología (ácido glicólico). Tratamiento para la pigmentación de la piel causada por el sol, las hormonas y el acné. Un producto potente con resultados excepcionales. Debe usarse en combinación con WHITE ACTIVATOR LIQUIGEL para activar sus componentes activos.",
+                        "WHITE ACTIVATOR LIQUIGEL – Un gel de textura ligera que permite diluir los productos activos INTENSIVE y BOOSTER para el tratamiento de la pigmentación cutánea. Mejora la penetración de los productos activos, calma e hidrata la piel. WHITE INTENSIVE LIQUIGEL y WHITE BOOSTER LIQUIGEL siempre se incluyen con este producto.",
+                        "Humectante y protector solar FPS 50 : Este protector solar filtra los rayos UVB dañinos que causan quemaduras, así como el daño causado por el rápido envejecimiento de la piel causado por los rayos UVA. Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño que pueda causar la exposición a la luz solar y a la luz azul de las pantallas.",
+                        "Hidratante activo para piel normal y seca : Restaura la hidratación natural de la piel con la ayuda de hidratantes inteligentes. Se ha demostrado que el producto mejora la hidratación de la piel en un 25 %. Restaura y rejuvenece la piel, proporcionándole la máxima hidratación."
+                    ]
+                },
+                {
+                    product: "Kit combinado para el tratamiento de arrugas y manchas (hormonal/solar)",
+                    description: "¡La solución perfecta para el cuidado de la piel! Diseñado para el tratamiento combinado de arrugas y pigmentación. \n\n Los productos reafirman la piel, uniformizan el tono, rejuvenecen y le dan una textura uniforme. \n\n ¡Este kit no es apto para mujeres embarazadas o en período de lactancia! \n\n Kit combinado para el tratamiento de arrugas y pigmentación. \n\n El kit contiene 6 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "CREMA BLANQUEADORA B",
+                        "PIGMENTO NUEVA PIEL",
+                        "REPARACIÓN TOTAL RX",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR",
+                        "HIDRATANTE ACTIVO / CREMA HUMECTANTE PARA PIEL NORMAL A SECA",
+                        "ESPUMA LIMPIADORA B-WHITE: Una espuma que limpia profundamente la piel del rostro y permite que los ingredientes activos penetren fácilmente en profundidad sin dañar la hidratación natural de la piel. \n Especialmente indicada para pieles con tono desigual.",
+                        "CREMA BLANQUEADORA B: El producto más eficaz desarrollado hasta la fecha para un efecto iluminador, con 3 acciones: aclaramiento y destrucción de las manchas existentes, reducción inmediata de la producción de melanina (pigmento de la piel) y prevención de la formación de nuevas manchas.",
+                        "PIGMENTO NUEVA PIEL: Este potente supresor de melanina aclara las manchas de la piel. Apto para usar durante el embarazo y la lactancia. \n Se puede usar en viajes con mucha exposición al sol, antes o después de tratamientos de belleza como peelings u otros aparatos, junto con el kit WHITE PLUS para un tratamiento antipigmentación muy potente y para mantener el resultado. No irrita ni se descama.",
+                        "REPARACIÓN TOTAL RX: Crema reparadora de noche: fórmula innovadora que ofrece un efecto increíble en la renovación de la piel con resultados comprobados y seguros. \n Gracias a una nueva combinación de ingredientes únicos, el producto mejora significativamente la apariencia de la piel, suavizando las arrugas y fortaleciéndola. \n  Elimina el acné, neutraliza los radicales libres, proporciona una renovación cutánea instantánea, una ligera elasticidad y un ligero tono rosado, dejando la piel con un aspecto radiante, fresco y juvenil. \n ¡Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo!",
+                        "BLOQUEADOR FPS 50 HIDRATANTE CON PROTECTOR SOLAR: Este protector solar filtra los rayos UVB dañinos que causan quemaduras, así como el daño causado por el rápido envejecimiento de la piel causado por los rayos UVA. \n Contiene ingredientes calmantes y antioxidantes que brindan protección instantánea contra cualquier daño causado por la exposición a la luz solar y a la luz azul de las pantallas.",
+                        "HIDRATANTE ACTIVO / CREMA HUMECTANTE PARA PIEL NORMAL A SECA: Restaura la hidratación natural de la piel con humectantes inteligentes. Se ha demostrado que el producto mejora la hidratación de la piel en un 25 %. \n Restaura y rejuvenece la piel, proporcionándole la máxima hidratación."
+                    ]
+                },
+                {
+                    product: "Conjunto de manchas rojas, marrones y estancadas post acné",
+                    description: "¡La solución perfecta para el cuidado de la piel! Diseñado para el tratamiento combinado de la pigmentación postacné. \n\n Los productos reafirman la piel, crean un tono uniforme, rejuvenecen y proporcionan una textura uniforme. \n\n El kit no es apto para mujeres embarazadas o en período de lactancia! \n\n Contiene 5 productos:",
+                    items: [
+                        "ESPUMA LIMPIADORA B-WHITE",
+                        "GEL B-BLANCO",
+                        "PIGMENTO NUEVA PIEL",
+                        "REPARACIÓN TOTAL RX",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA",
+                        "ESPUMA LIMPIADORA B-WHITE: Una espuma que limpia profundamente la piel del rostro y permite que los ingredientes activos penetren fácilmente en profundidad sin dañar la hidratación natural de la piel. \n Especialmente indicada para pieles con tono desigual.",
+                        "GEL B-BLANCO: Un gel terapéutico concentrado especial, diseñado para solucionar el problema de las manchas en la piel. \n Posee un doble efecto: sustancias iluminadoras y sustancias que eliminan suavemente la capa superficial de la piel, incluyendo las células muertas. \n Deja la piel fresca, sana y con un tono uniforme.",
+                        "PIGMENTO NUEVA PIEL: Este potente supresor de melanina aclara las manchas de la piel. Apto para: embarazo y lactancia, viajes con exposición solar intensa, antes o después de tratamientos de belleza como peelings u otros aparatos, junto con el kit WHITE PLUS para un tratamiento antipigmentación muy intenso y para mantener el resultado. \n No irrita ni descama.",
+                        "REPARACIÓN TOTAL RX: Crema restauradora de noche: una fórmula innovadora que tiene un efecto increíble en la renovación de la piel, con resultados comprobados y seguros. \n Gracias a una nueva combinación de ingredientes únicos, el producto mejora significativamente la apariencia de la piel, suavizando las arrugas y fortaleciéndola. Elimina el acné, neutraliza los radicales libres, proporciona una renovación cutánea instantánea, una ligera elasticidad y un ligero tono rosado, dejando la piel con un aspecto brillante, fresco y juvenil. \n ¡Una de las cremas más importantes para el tratamiento del envejecimiento cutáneo!",
+                        "ULTRA HIDRATANTE PARA PIEL GRASA: Tiene efecto antiinflamatorio y promueve una hidratación profunda, sin provocar la activación del proceso inflamatorio en el acné inflamatorio. \n Elimina las molestias de la piel inflamada."
+                    ]
+                },
+            ]
+        }
+    ]
+};
+---
+
+<MainLayout
+    title="Kits de Cuidado Facial – Rutinas Completas y Tratamientos Combinados | Alvit Eclat"
+    description="Descubrí nuestros kits de cuidado facial diseñados para potenciar resultados: combos antiedad, hidratación, limpieza, luminosidad y más. Rutinas listas para usar con productos de alta calidad."
+>
+    <Header />
+
+    
+
+    <!-- HERO SECTION -->
+    <section class="w-full bg-gradient-to-br from-pink-50 via-white to-purple-50 py-16 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            
+            <span class="inline-block px-4 py-2 bg-pink-100 text-pink-700 rounded-full text-xs font-semibold tracking-wider uppercase mb-4">
+                Soluciones Completas
+            </span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Kits Universales Listos para Usar<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+                    Adaptables a Cada Cliente
+                </span>
+            </h1>
+
+            <div class="max-w-3xl mx-auto space-y-4 text-gray-700 text-lg leading-relaxed">
+                <p>
+                    Dermalosophy se fundó en Israel en 2010 y desde entonces ofrece soluciones dermatológicas utilizando una amplia gama de productos activos para el cuidado de la piel en el hogar y clínicas profesionales, que se venden a través de los principales expertos en cuidado de la piel del país.
+                </p>
+
+                <p>
+                    El principio rector de 'Dermalosophy' es brindar a los clientes los <strong class="text-gray-900">mejores y más rápidos resultados</strong> disponibles en el mundo hoy en día, utilizando ingredientes únicos seleccionados, que están probados en estudios clínicos con resultados sorprendentes.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CATEGORY TABS -->
+    <section class="w-full bg-white py-12 px-6 sticky top-0 z-40 shadow-md">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button class="category-btn active" data-category="acne">
+                    <span class="icon">🎯</span>
+                    <span>Acné</span>
+                </button>
+                <button class="category-btn" data-category="antiaging">
+                    <span class="icon">✨</span>
+                    <span>Anti-Envejecimiento</span>
+                </button>
+                <button class="category-btn" data-category="pigmentation">
+                    <span class="icon">🌟</span>
+                    <span>Pigmentación</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- KITS CONTENT -->
+    <section class="w-full px-6 py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+
+            <!-- ACNE KITS -->
+            <div class="kits-container active" data-category="acne">
+                {kitsData.acne.map((kit, index) => (
+                    <div class="kit-card mb-16">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                            
+                            <!-- Imagen -->
+                            <div class="order-2 lg:order-1">
+                                <div class="relative">
+                                    <div class="absolute -inset-4 bg-gradient-to-r from-pink-200 to-purple-200 rounded-2xl blur-2xl opacity-30"></div>
+                                    <img 
+                                        src={kit.image} 
+                                        alt={kit.title}
+                                        class="relative w-full h-[400px] object-contain rounded-2xl shadow-xl bg-white"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Contenido -->
+                            <div class="order-1 lg:order-2">
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                                    {kit.title}
+                                </h2>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    {kit.description}
+                                </p>
+
+                                <div class="bg-pink-50 rounded-xl p-6 mb-6">
+                                    <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                        <span class="text-pink-600">📦</span>
+                                        El kit contiene {kit.products.length} productos:
+                                    </h3>
+                                    <ul class="space-y-2">
+                                        {kit.products.map((product) => (
+                                            <li class="flex items-start gap-2 text-gray-700">
+                                                <span class="text-pink-500 mt-1">•</span>
+                                                <span class="font-medium">{product}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <button class="details-toggle-btn group inline-flex items-center gap-2 text-pink-600 hover:text-pink-700 font-semibold transition-colors">
+                                    <span>Ver detalles de productos</span>
+                                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+
+                                <div class="details-content hidden mt-6 space-y-4 border-t border-gray-200 pt-6">
+                                    {kit.details.map((detail) => (
+                                        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                                            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                                <span class="text-pink-600">✓</span>
+                                                {detail.product}
+                                            </h4>
+                                            
+                                            <p class="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                                                {detail.description}
+                                            </p>
+                                            
+                                            {detail.items && detail.items.length > 0 && (
+                                                <div class="pl-6 space-y-2">
+                                                    <ul class="space-y-2">
+                                                        {detail.items.map((item) => (
+                                                            <li class="flex items-start gap-2 text-gray-700 text-sm">
+                                                                <span class="text-pink-500 mt-1 flex-shrink-0">•</span>
+                                                                <span>{item}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <!-- ANTI-AGING KITS -->
+            <div class="kits-container hidden" data-category="antiaging">
+                {kitsData.antiaging.map((kit, index) => (
+                    <div class="kit-card mb-16">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                            
+                            <div class="order-2 lg:order-1">
+                                <div class="relative">
+                                    <div class="absolute -inset-4 bg-gradient-to-r from-pink-200 to-purple-200 rounded-2xl blur-2xl opacity-30"></div>
+                                    <img 
+                                        src={kit.image} 
+                                        alt={kit.title}
+                                        class="relative w-full h-[400px] object-contain rounded-2xl shadow-xl bg-white"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="order-1 lg:order-2">
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                                    {kit.title}
+                                </h2>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    {kit.description}
+                                </p>
+
+                                <div class="bg-purple-50 rounded-xl p-6 mb-6">
+                                    <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                        <span class="text-purple-600">📦</span>
+                                        El kit contiene {kit.products.length} productos:
+                                    </h3>
+                                    <ul class="space-y-2">
+                                        {kit.products.map((product) => (
+                                            <li class="flex items-start gap-2 text-gray-700">
+                                                <span class="text-purple-500 mt-1">•</span>
+                                                <span class="font-medium">{product}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {kit.details && (
+                                    <>
+                                        <button class="details-toggle-btn group inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-colors">
+                                            <span>Ver detalles de productos</span>
+                                            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+
+                                        <div class="details-content hidden mt-6 space-y-4 border-t border-gray-200 pt-6">
+                                            {kit.details.map((detail) => (
+                                                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                                        <span class="text-purple-600">✓</span>
+                                                        {detail.product}
+                                                    </h4>
+                                                    
+                                                    <p class="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                                                        {detail.description}
+                                                    </p>
+                                                    
+                                                    {detail.items && detail.items.length > 0 && (
+                                                        <div class="pl-6 space-y-2">
+                                                            <ul class="space-y-2">
+                                                                {detail.items.map((item) => (
+                                                                    <li class="flex items-start gap-2 text-gray-700 text-sm">
+                                                                        <span class="text-purple-500 mt-1 flex-shrink-0">•</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <!-- PIGMENTATION KITS -->
+            <div class="kits-container hidden" data-category="pigmentation">
+                {kitsData.pigmentation.map((kit, index) => (
+                    <div class="kit-card mb-16">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                            
+                            <div class="order-2 lg:order-1">
+                                <div class="relative">
+                                    <div class="absolute -inset-4 bg-gradient-to-r from-pink-200 to-purple-200 rounded-2xl blur-2xl opacity-30"></div>
+                                    <img 
+                                        src={kit.image} 
+                                        alt={kit.title}
+                                        class="relative w-full h-[400px] object-contain rounded-2xl shadow-xl bg-white"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="order-1 lg:order-2">
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                                    {kit.title}
+                                </h2>
+                                
+                                <p class="text-gray-700 leading-relaxed mb-6">
+                                    {kit.description}
+                                </p>
+
+                                <div class="bg-amber-50 rounded-xl p-6 mb-6">
+                                    <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                        <span class="text-amber-600">📦</span>
+                                        El kit contiene {kit.products.length} productos:
+                                    </h3>
+                                    <ul class="space-y-2">
+                                        {kit.products.map((product) => (
+                                            <li class="flex items-start gap-2 text-gray-700">
+                                                <span class="text-amber-500 mt-1">•</span>
+                                                <span class="font-medium">{product}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {kit.details && (
+                                    <>
+                                        <button class="details-toggle-btn group inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-semibold transition-colors">
+                                            <span>Ver detalles de productos</span>
+                                            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+
+                                        <div class="details-content hidden mt-6 space-y-4 border-t border-gray-200 pt-6">
+                                            {kit.details.map((detail) => (
+                                                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                                        <span class="text-amber-600">✓</span>
+                                                        {detail.product}
+                                                    </h4>
+                                                    
+                                                    <p class="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                                                        {detail.description}
+                                                    </p>
+                                                    
+                                                    {detail.items && detail.items.length > 0 && (
+                                                        <div class="pl-6 space-y-2">
+                                                            <ul class="space-y-2">
+                                                                {detail.items.map((item) => (
+                                                                    <li class="flex items-start gap-2 text-gray-700 text-sm">
+                                                                        <span class="text-amber-500 mt-1 flex-shrink-0">•</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+        </div>
+    </section>
+
+    <section class="w-full py-8 md:py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight text-center max-w-4xl mx-auto">
+            Para obtener instrucciones precisas sobre el uso y las condiciones de los distintos procedimientos, lea el folleto completo con instrucciones
+        </h2>
+    </div>
+</section>
+
+    <Footer />
+</MainLayout>
+
+<style>
+    .category-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        border: 2px solid #d1d5db;
+        background-color: white;
+        color: #374151;
+        transition: all 0.3s ease;
+    }
+
+    .category-btn:hover {
+        border-color: #fbcfe8;
+        background-color: #fdf2f8;
+        transform: scale(1.05);
+    }
+
+    .category-btn.active {
+        border-color: #ec4899;
+        background: linear-gradient(to right, #ec4899, #9333ea);
+        color: white;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-btn .icon {
+        font-size: 1.25rem;
+    }
+
+    .kits-container {
+        display: none;
+        animation: fadeIn 0.5s ease-in;
+    }
+
+    .kits-container.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .kit-card {
+        animation: slideInUp 0.6s ease-out;
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .details-content {
+        animation: expandDown 0.3s ease-out;
+    }
+
+    @keyframes expandDown {
+        from {
+            opacity: 0;
+            max-height: 0;
+        }
+        to {
+            opacity: 1;
+            max-height: 2000px;
+        }
+    }
+</style>
+
+<script>
+    // Category switching
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const kitsContainers = document.querySelectorAll('.kits-container');
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category');
+
+            // Update active button
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Show corresponding kits
+            kitsContainers.forEach(container => {
+                if (container.getAttribute('data-category') === category) {
+                    container.classList.remove('hidden');
+                    container.classList.add('active');
+                } else {
+                    container.classList.add('hidden');
+                    container.classList.remove('active');
+                }
+            });
+
+            // Scroll to kits section smoothly
+            window.scrollTo({
+                top: document.querySelector('.kits-container.active').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Mapeo de IDs de collections a categorías de kits
+    const kitIdToCategory = {
+        'kit-acne': 'acne',
+        'kit-antiedad': 'antiaging',
+        'kit-pigmentacion': 'pigmentation'
+    };
+
+    // Función para activar una categoría
+    function activateCategory(category) {
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const kitsContainers = document.querySelectorAll('.kits-container');
+
+        // Update active button
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        const targetBtn = document.querySelector(`[data-category="${category}"]`);
+        if (targetBtn) {
+            targetBtn.classList.add('active');
+        }
+
+        // Show corresponding kits
+        kitsContainers.forEach(container => {
+            if (container.getAttribute('data-category') === category) {
+                container.classList.remove('hidden');
+                container.classList.add('active');
+            } else {
+                container.classList.add('hidden');
+                container.classList.remove('active');
+            }
+        });
+    }
+
+    // Detectar hash en la URL al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.substring(1); // Elimina el #
+        
+        if (hash && kitIdToCategory[hash]) {
+            const category = kitIdToCategory[hash];
+            activateCategory(category);
+            
+            // Hacer scroll suave a la sección de kits después de un pequeño delay
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.querySelector('.kits-container.active').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    });
+
+    // Details toggle functionality
+    const detailsToggles = document.querySelectorAll('.details-toggle-btn');
+
+    detailsToggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('svg');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                btn.querySelector('span').textContent = 'Ocultar detalles';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                btn.querySelector('span').textContent = 'Ver detalles de productos';
+            }
+        });
+    });
+</script>

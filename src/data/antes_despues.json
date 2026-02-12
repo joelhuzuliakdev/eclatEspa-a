@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "categoria": "acne",
+        "nombre": "María, 28 años",
+        "duracion": "21 dias",
+        "antes": "/antes_despues/antesydespues24.png",
+        "despues": "/antes_despues/antesydespues14.jpg",
+        "productos": [
+            "LIMPIADOR PROFUNDO PARA PIEL PROBLEMÁTICA SIN SLS",
+            "ACNE BIO",
+            "Gel triple para el acné",
+            "ULTRA HIDRATANTE PARA PIEL GRASA"
+        ],
+        "testimonio": "Mi piel cambió completamente. El acné disminuyó notablemente."
+    },
+    {
+        "id": 2,
+        "categoria": "acne",
+        "nombre": "Florencia, 24 años",
+        "duracion": "25 dias",
+        "antes": "/antes_despues/antesydespues13.jpg",
+        "despues": "/antes_despues/antesydespues15.jpg",
+        "productos": [
+            "LIMPIADOR PROFUNDO PARA PIEL PROBLEMÁTICA SIN SLS",
+            "ACNE SUPER LÍQUIDO",
+            "Tónico para piel grasa",
+            "ULTRA HIDRATANTE PARA PIEL GRASA"
+        ],
+        "testimonio": "Resultados visibles desde la primera semana."
+    },
+    {
+        "id": 3,
+        "categoria": "hiperpigmentacion",
+        "nombre": "Laura, 67 años",
+        "duracion": "23 dias",
+        "antes": "/antes_despues/antesydespues20.1.jpg",
+        "despues": "/antes_despues/antesydespues20.jpg",
+        "productos": [
+            "Espuma limpiadora B-WHITE – Sin SLS",
+            "Gel concentrado B-White",
+            "Crema blanqueadora B-WHITE",
+            "Protección física suave FPS 50 M – Prevención"
+        ],
+        "testimonio": "Las manchas se redujeron increíblemente."
+    },
+    {
+        "id": 4,
+        "categoria": "hiperpigmentacion",
+        "nombre": "Sofía, 42 años",
+        "duracion": "2 meses",
+        "antes": "/antes_despues/antesydespues23.jpg",
+        "despues": "/antes_despues/antesydespues23.1.jpg",
+        "productos": [
+            "Espuma limpiadora B-WHITE – Sin SLS",
+            "Pigmento Nueva Piel",
+            "Líquigel Blanco Intensivo",
+            "SERUM PROTECT VIT. C + ANTIOXIDANTES"
+        ],
+        "testimonio": "Mi tono de piel es mucho más uniforme ahora."
+    },
+    {
+        "id": 5,
+        "categoria": "anti-envejecimiento",
+        "nombre": "Ana, 62 años",
+        "duracion": "20 dias",
+        "antes": "/antes_despues/antesydespues10.jpg",
+        "despues": "/antes_despues/antesydespues.jpg",
+        "productos": [
+            "CREMA RECUPERADORA MICROPEEL",
+            "SÉRUM REPARADOR DEFINITIVO DE ARRUGAS",
+            "REPARACIÓN TOTAL FORTE",
+            "FPS 50 – Bloqueador hidratante con protector solar"
+        ],
+        "testimonio": "Las líneas de expresión disminuyeron notablemente."
+    },
+    {
+        "id": 6,
+        "categoria": "anti-envejecimiento",
+        "nombre": "Patricia, 60 años",
+        "duracion": "1 mes",
+        "antes": "/antes_despues/antesydespues1.jpg",
+        "despues": "/antes_despues/antesydespues1.2.jpg",
+        "productos": [
+            "SÉRUM HIDRATANTE + ÁCIDO HIALURÓNICO DE NUEVA GENERACIÓN",
+            "SÉRUM PROTECT VIT. C + ANTIOXIDANTES",
+            "MASCARILLA SUPERHIDRATANTE",
+            "HIDRATANTE ACTIVO / CREMA HUMECTANTE PARA PIEL NORMAL A SECA"
+        ],
+        "testimonio": "Mi piel luce más firme y radiante."
+    }
+]

@@ -1,0 +1,414 @@
+---
+import Header from "../layouts/Header.astro";
+import Footer from "../layouts/Footer.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="Sobre Nosotros | Alvit Eclat – Cuidado de la piel, antiedad y protección solar"
+  description={`Conocé la historia de Alvit Eclat, especialistas en cremas antiedad, protección solar y cuidado de la piel. Calidad, asesoramiento y productos efectivos para tu rutina.`}
+>
+    <button
+        id="btnUp"
+        class="fixed bottom-5 right-5 z-[9999] bg-black text-white p-3 rounded-full shadow-lg hover:bg-zinc-800 transition-all">
+        ↑
+    </button>
+    <Header />
+
+    <!-- HERO ABOUT -->
+    <section class="relative w-full py-16 md:py-24 px-6 md:px-10 lg:px-20 bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
+            <!-- TEXT -->
+            <div class="w-full md:w-1/2 fade-in-up">
+                <span class="inline-block px-4 py-2 bg-pink-100 text-pink-700 rounded-full text-xs font-semibold tracking-wider uppercase mb-4">
+                    Nuestra Historia
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                    Sobre <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Nosotros</span>
+                </h1>
+
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Bienvenido a <strong>Alvit Eclat</strong>, tu nuevo destino de confianza para descubrir los mejores productos de cuidado de la piel. Somos una marca que nació con un objetivo claro: acercarte soluciones reales, efectivas y accesibles para transformar tu piel y elevar tu bienestar diario.
+                </p>
+
+                <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                    En un mundo lleno de opciones, donde cada producto promete resultados milagrosos, nosotros elegimos un camino diferente: trabajar únicamente con cremas antiedad, protectores solares, serums e hidratantes que verdaderamente cumplen lo que dicen.
+                </p>
+
+                <a
+                    href="/products"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-7 py-4 uppercase rounded-full font-semibold text-sm tracking-wide hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Ver Nuestros Productos
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="w-full md:w-1/2 fade-in-right">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-pink-300 to-purple-300 rounded-2xl blur-2xl opacity-30"></div>
+                    <img
+                        class="relative w-full h-[22rem] sm:h-[28rem] md:h-[35rem] object-cover rounded-2xl shadow-2xl"
+                        src="/Sobre_Nosotros/Sobre_Nosotros_1.webp"
+                        alt="Alvit Eclat - Cuidado de la piel"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRO TEXT -->
+    <section class="w-full px-6 md:px-10 lg:px-20 py-16">
+        <div class="max-w-4xl mx-auto text-center fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Cuidado profesional para tu piel
+            </h2>
+            <p class="text-xl text-gray-600 leading-relaxed">
+                Creemos que una piel sana no solo se ve, también se siente. Por eso, en Alvit Eclat reunimos una línea de productos pensados para cubrir las necesidades esenciales del cuidado de la piel.
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURES GRID -->
+    <section class="w-full px-6 md:px-10 lg:px-20 pb-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">⏱️</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Prevención del envejecimiento</h3>
+                    <p class="text-gray-600 text-sm">Actúa antes de que aparezcan los signos de la edad</p>
+                </div>
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Reducción de arrugas</h3>
+                    <p class="text-gray-600 text-sm">Suaviza líneas de expresión y arrugas profundas</p>
+                </div>
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">💧</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Hidratación profunda</h3>
+                    <p class="text-gray-600 text-sm">Nutrición intensa para una piel suave y radiante</p>
+                </div>
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">☀️</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Protección solar avanzada</h3>
+                    <p class="text-gray-600 text-sm">Escudo efectivo contra rayos UV y daño solar</p>
+                </div>
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">🎨</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Mejora de textura y tono</h3>
+                    <p class="text-gray-600 text-sm">Unifica y perfecciona el aspecto de tu piel</p>
+                </div>
+
+                <div class="feature-card group bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pink-200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl">🌿</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Cuidado diario universal</h3>
+                    <p class="text-gray-600 text-sm">Productos seguros para todo tipo de piel</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TWO CARDS SECTION -->
+    <section class="w-full px-6 md:px-10 lg:px-20 py-16 bg-gray-50">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="purpose-card group relative bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="relative">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 uppercase tracking-wide">Nuestro propósito</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Acercarte productos profesionales que antes solo encontrabas en clínicas o centros especializados.
+                    </p>
+                </div>
+            </div>
+
+            <div class="purpose-card group relative bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="relative">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white text-2xl">💎</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 uppercase tracking-wide">Lo que nos diferencia</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        No solo vendemos skincare: te guiamos para que elijas lo que realmente necesitás según tus objetivos, tu tipo de piel y tus hábitos.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ACCORDION SECTION -->
+    <section class="w-full max-w-4xl mx-auto py-20 px-6">
+        <div class="text-center mb-12 fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">¿Por qué elegirnos?</h2>
+            <p class="text-gray-600 text-lg">Razones que nos hacen únicos</p>
+        </div>
+
+        <div class="space-y-4">
+
+            <!-- ITEM 1 -->
+            <div class="accordion-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:border-pink-200 transition-colors">
+                <button class="w-full flex items-center justify-between p-6 faq-btn text-left cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">🔬</span>
+                        </div>
+                        <span class="font-semibold text-gray-900 text-lg group-hover:text-pink-600 transition-colors">
+                            Productos seleccionados con criterio profesional
+                        </span>
+                    </div>
+                    <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-pink-200 transition-colors">
+                        <span class="text-pink-600 text-xl font-bold transition-all">+</span>
+                    </div>
+                </button>
+                <div class="hidden faq-content px-6 pb-6">
+                    <p class="text-gray-600 leading-relaxed pl-14">
+                        Cada artículo fue evaluado por su calidad, efectividad y reputación. Trabajamos solo con marcas que demuestran resultados comprobados.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="accordion-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:border-pink-200 transition-colors">
+                <button class="w-full flex items-center justify-between p-6 faq-btn text-left cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">💬</span>
+                        </div>
+                        <span class="font-semibold text-gray-900 text-lg group-hover:text-pink-600 transition-colors">
+                            Atención personalizada
+                        </span>
+                    </div>
+                    <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-pink-200 transition-colors">
+                        <span class="text-pink-600 text-xl font-bold transition-all">+</span>
+                    </div>
+                </button>
+                <div class="hidden faq-content px-6 pb-6">
+                    <p class="text-gray-600 leading-relaxed pl-14">
+                        Respondemos tus dudas y te guiamos en tu rutina. Nuestro equipo está comprometido con tu bienestar y resultados.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="accordion-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:border-pink-200 transition-colors">
+                <button class="w-full flex items-center justify-between p-6 faq-btn text-left cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">✅</span>
+                        </div>
+                        <span class="font-semibold text-gray-900 text-lg group-hover:text-pink-600 transition-colors">
+                            Resultados reales y comprobables
+                        </span>
+                    </div>
+                    <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-pink-200 transition-colors">
+                        <span class="text-pink-600 text-xl font-bold transition-all">+</span>
+                    </div>
+                </button>
+                <div class="hidden faq-content px-6 pb-6">
+                    <p class="text-gray-600 leading-relaxed pl-14">
+                        Trabajamos con productos que realmente funcionan. Sin promesas vacías, solo soluciones efectivas respaldadas por la ciencia.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ITEM 4 -->
+            <div class="accordion-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:border-pink-200 transition-colors">
+                <button class="w-full flex items-center justify-between p-6 faq-btn text-left cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">📦</span>
+                        </div>
+                        <span class="font-semibold text-gray-900 text-lg group-hover:text-pink-600 transition-colors">
+                            Envíos rápidos y seguros
+                        </span>
+                    </div>
+                    <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-pink-200 transition-colors">
+                        <span class="text-pink-600 text-xl font-bold transition-all">+</span>
+                    </div>
+                </button>
+                <div class="hidden faq-content px-6 pb-6">
+                    <p class="text-gray-600 leading-relaxed pl-14">
+                        Comprá fácil y recibí tu pedido en todo el país. Embalaje cuidadoso para que tus productos lleguen en perfecto estado.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-xl text-gray-700 leading-relaxed font-light">
+                En Alvit Eclat, creemos que <strong class="font-semibold text-gray-900">invertir en tu piel es invertir en tu confianza</strong>.
+            </p>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="w-full py-20 px-6 bg-gradient-to-br from-pink-50 via-purple-50 to-pink-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        </div>
+        
+        <div class="max-w-3xl mx-auto text-center relative z-10 fade-in-up">
+            <p class="text-gray-600 text-lg mb-2">Gracias por elegirnos</p>
+            <h3 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                Alvit Eclat
+            </h3>
+            <p class="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 font-semibold">
+                Tu piel se ilumina, tu confianza también
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/products" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all">
+                    Explorar Productos
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+                <a href="/contacto" class="inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-semibold border-2 border-gray-200 hover:border-pink-300 hover:shadow-lg transition-all">
+                    Contactanos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</MainLayout>
+
+<style>
+    @keyframes blob {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+        }
+        33% {
+            transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+            transform: translate(-20px, 20px) scale(0.9);
+        }
+    }
+    
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+    
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .fade-in-right {
+        animation: fadeInRight 0.8s ease-out;
+    }
+    
+    .feature-card {
+        animation: fadeInUp 0.6s ease-out backwards;
+    }
+    
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:nth-child(4) { animation-delay: 0.4s; }
+    .feature-card:nth-child(5) { animation-delay: 0.5s; }
+    .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+    .accordion-item {
+        animation: fadeInUp 0.5s ease-out backwards;
+    }
+    
+    .accordion-item:nth-child(1) { animation-delay: 0.1s; }
+    .accordion-item:nth-child(2) { animation-delay: 0.2s; }
+    .accordion-item:nth-child(3) { animation-delay: 0.3s; }
+    .accordion-item:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+<script>
+    const faqButtons = document.querySelectorAll(".faq-btn");
+
+    faqButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const content = btn.nextElementSibling as HTMLElement;
+            const icon = btn.querySelector("span:last-child") as HTMLElement;
+
+            content.classList.toggle("hidden");
+            icon.textContent = content.classList.contains("hidden") ? "+" : "−";
+        });
+    });
+
+    //Boton para subir
+
+    const btnUp = document.getElementById("btnUp");
+
+    // Mostrar/ocultar botón al scrollear
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+        btnUp.classList.remove("opacity-0", "pointer-events-none");
+        } else {
+        btnUp.classList.add("opacity-0", "pointer-events-none");
+        }
+    });
+
+    // Scroll suave hacia arriba
+    btnUp.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>

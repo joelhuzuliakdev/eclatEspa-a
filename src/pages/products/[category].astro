@@ -1,0 +1,400 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import productsData from "../../data/products.json";
+import Header from "../../layouts/Header.astro";
+import Footer from "../../layouts/Footer.astro";
+
+const allCategories = {
+  "antiedad": "Antiedad",
+  "limpiadores": "Limpiadores",
+  "hiperpigmentacion": "Hiperpigmentación",
+  "hidratantes": "Hidratantes",
+  "otros": "Otros",
+  "proteccion-solar": "Protección solar",
+  "acne": "Acné",
+};
+
+export function getStaticPaths() {
+  const cats = {
+    "antiedad": "Antiedad",
+    "limpiadores": "Limpiadores",
+    "hiperpigmentacion": "Hiperpigmentación",
+    "hidratantes": "Hidratantes",
+    "otros": "Otros",
+    "proteccion-solar": "Protección solar",
+    "acne": "Acné",
+    "all": "Todos los productos"
+  };
+  
+  return Object.keys(cats).map((categoryId) => ({
+    params: { category: categoryId },
+  }));
+}
+
+const { category } = Astro.params;
+const categoryLabel =
+  category === "all"
+    ? "Todos los productos"
+    : (allCategories[category] || "Productos");
+
+// ✅ FILTRO ACTUALIZADO para soportar arrays
+const filteredProducts = category === "all" 
+  ? productsData 
+  : productsData.filter((product) => {
+      if (Array.isArray(product.category)) {
+        return product.category.includes(category);
+      }
+      return product.category === category;
+    });
+
+// ✅ CONTADOR ACTUALIZADO para soportar arrays
+const categoryCounts = Object.keys(allCategories).reduce((acc, cat) => {
+  acc[cat] = productsData.filter(p => {
+    if (Array.isArray(p.category)) {
+      return p.category.includes(cat);
+    }
+    return p.category === cat;
+  }).length;
+  return acc;
+}, {} as Record<string, number>);
+---
+
+<MainLayout title={`${categoryLabel} - Alvit Eclat | Cuidado de la Piel`}>
+  <Header />
+
+  <!-- Anti-flash si venís con ?search= -->
+  <script is:inline>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const term = (params.get("search") || "").trim();
+      if (term) document.documentElement.classList.add("has-search");
+    })();
+  </script>
+
+  <section class="max-w-7xl mx-auto pb-20 px-6">
+    <div class="flex flex-col md:flex-row gap-8">
+
+      <!-- SIDEBAR IZQUIERDO -->
+      <aside class="w-full md:w-60 shrink-0">
+        <!-- Búsqueda -->
+        <div class="mb-10">
+          <div class="relative">
+            <input
+              type="text"
+              id="product-search"
+              placeholder="Buscar productos..."
+              class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400"
+            />
+            <button class="absolute right-3 top-1/2 -translate-y-1/2 bg-black text-white p-1.5 rounded">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categorías -->
+        <div>
+          <h3 class="text-base font-semibold mb-5">Categorías</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="/products/all"
+                class={`flex items-center justify-between text-sm ${
+                  category === "all"
+                    ? "text-pink-700"
+                    : "text-gray-700 hover:text-pink-700"
+                }`}
+              >
+                <span>Todos</span>
+                <span class="text-gray-400">({productsData.length})</span>
+              </a>
+            </li>
+
+            {Object.entries(allCategories).map(([catId, catLabel]) => (
+              <li>
+                <a
+                  href={`/products/${catId}`}
+                  class={`flex items-center justify-between text-sm ${
+                    category === catId
+                      ? "text-pink-700"
+                      : "text-gray-700 hover:text-pink-700"
+                  }`}
+                >
+                  <span>{catLabel}</span>
+                  <span class="text-gray-400">
+                    ({categoryCounts[catId] || 0})
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+
+      <!-- ÁREA DE PRODUCTOS -->
+      <div class="flex-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b">
+          <p class="text-sm text-gray-600" data-results-count>
+            Mostrando todos los {filteredProducts.length} resultados
+          </p>
+        </div>
+
+        {filteredProducts.length > 0 ? (
+          <div
+            id="products-grid"
+            class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center"
+          >
+            {filteredProducts.map((product) => (
+              <article 
+                class="product-card bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer flex flex-col h-full"
+                data-product-id={product.id}
+                data-product-name={product.name}
+                data-product-image={product.image}
+                data-product-description={product.description}
+                data-product-howtouse={product.howToUse || ""}
+                data-product-ingredients={JSON.stringify(product.ingredients || [])}
+                data-product-category={JSON.stringify(product.category || "")}  <!-- ✅ NUEVO -->
+              >
+                <div class="aspect-square overflow-hidden rounded-t-lg">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                  <h3 class="text-lg font-semibold mb-3 text-gray-800 flex-grow">{product.name}</h3>
+                  <button class="open-modal-btn w-full bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded transition-colors mt-auto">
+                    Más información
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="text-center py-12 text-gray-600">
+            No se encontraron productos.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL (igual que antes) -->
+  <div 
+    id="product-modal" 
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 backdrop-blur-md bg-white/30"
+  >
+    <div class="bg-white/95 backdrop-blur-sm rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
+      <button 
+        id="close-modal"
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold z-10"
+      >
+        &times;
+      </button>
+
+      <div class="flex flex-col md:flex-row gap-8 p-8 md:p-12">
+        <div class="md:w-1/2">
+          <img id="modal-image" src="" alt="" class="w-full rounded-lg" />
+        </div>
+
+        <div class="md:w-1/2 flex flex-col">
+          <h2 id="modal-title" class="text-3xl font-bold mb-6 text-gray-800"></h2>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2 text-gray-900">Descripción</h3>
+            <p id="modal-description" class="text-gray-600 leading-relaxed whitespace-pre-line text-base"></p>
+          </div>
+
+          <div id="modal-howtouse-section" class="mb-6 hidden">
+            <h3 class="text-lg font-semibold mb-2 text-gray-900">Modo de uso</h3>
+            <p id="modal-howtouse" class="text-gray-600 leading-relaxed whitespace-pre-line text-base"></p>
+          </div>
+
+          <div id="modal-ingredients-section" class="hidden">
+            <h3 class="text-lg font-semibold mb-2 text-gray-900">Ingredientes / activos</h3>
+            <div id="modal-ingredients" class="text-gray-600 leading-relaxed text-base"></div>
+          </div>
+
+          <div class="modal-badges">
+            <img 
+              src="/Products/ingredientes/ingredientes.jpg" 
+              alt="Características del producto"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</MainLayout>
+
+<style>
+  #product-modal.show { display: flex; }
+
+  .modal-badges{
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+  }
+  .modal-badges img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .has-search #products-grid { opacity: 0; pointer-events: none; }
+  #products-grid { transition: opacity .15s ease; }
+</style>
+
+<script>
+  const searchInput = document.getElementById("product-search");
+  const productsGrid = document.getElementById("products-grid");
+  const modal = document.getElementById("product-modal");
+  const closeModalBtn = document.getElementById("close-modal");
+  const modalImage = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDescription = document.getElementById("modal-description");
+  const modalHowToUse = document.getElementById("modal-howtouse");
+  const modalHowToUseSection = document.getElementById("modal-howtouse-section");
+  const modalIngredients = document.getElementById("modal-ingredients");
+  const modalIngredientsSection = document.getElementById("modal-ingredients-section");
+
+  if (searchInput && productsGrid) {
+    searchInput.addEventListener("input", (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const productCards = productsGrid.querySelectorAll("article");
+
+      productCards.forEach((card) => {
+        const text = card.textContent?.toLowerCase() || "";
+        card.style.display = text.includes(searchTerm) ? "block" : "none";
+      });
+    });
+  }
+
+  if (productsGrid && modal && modalImage && modalTitle && modalDescription && modalHowToUse && modalIngredients) {
+    productsGrid.addEventListener("click", (e) => {
+      const card = e.target.closest(".product-card");
+      if (!card) return;
+
+      const name = card.dataset.productName || "";
+      const image = card.dataset.productImage || "";
+      const description = card.dataset.productDescription || "";
+      const howToUse = card.dataset.productHowtouse || "";
+      const ingredientsJSON = card.dataset.productIngredients || "[]";
+
+      modalImage.src = image;
+      modalImage.alt = name;
+      modalTitle.textContent = name;
+      modalDescription.textContent = description;
+
+      if (howToUse && howToUse.trim() && modalHowToUseSection) {
+        modalHowToUse.textContent = howToUse;
+        modalHowToUseSection.classList.remove("hidden");
+      } else if (modalHowToUseSection) {
+        modalHowToUseSection.classList.add("hidden");
+      }
+
+      try {
+        const ingredients = JSON.parse(ingredientsJSON);
+        if (ingredients && ingredients.length > 0 && modalIngredientsSection) {
+          if (Array.isArray(ingredients)) {
+            modalIngredients.innerHTML = ingredients.map((ing) => `<div class="mb-1">• ${ing}</div>`).join("");
+          } else {
+            modalIngredients.textContent = ingredients;
+          }
+          modalIngredientsSection.classList.remove("hidden");
+        } else if (modalIngredientsSection) {
+          modalIngredientsSection.classList.add("hidden");
+        }
+      } catch (e) {
+        if (modalIngredientsSection) modalIngredientsSection.classList.add("hidden");
+      }
+
+      const modalBox = modal.querySelector(".bg-white\\/95");
+      if (modalBox) modalBox.scrollTop = 0;
+
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    });
+  }
+
+  const closeModal = () => {
+    if (modal) {
+      modal.classList.remove("show");
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
+
+<!-- ✅ FILTRO POR QUERY PARAM AHORA TAMBIÉN FILTRA CATEGORY -->
+<script>
+  const applySearchFilter = () => {
+    const params = new URLSearchParams(window.location.search);
+    const term = (params.get("search") || "").toLowerCase().trim();
+
+    const grid = document.getElementById("products-grid");
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll(".product-card"));
+    if (!term) {
+      grid.style.opacity = "1";
+      document.documentElement.classList.remove("has-search");
+      return;
+    }
+
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const name = (card.getAttribute("data-product-name") || "").toLowerCase();
+      const desc = (card.getAttribute("data-product-description") || "").toLowerCase();
+
+      // ✅ leer category (puede ser string o array)
+      let catRaw = card.getAttribute("data-product-category") || '""';
+      let catValue = "";
+      try {
+        const parsed = JSON.parse(catRaw);
+        catValue = Array.isArray(parsed)
+          ? parsed.join(" ").toLowerCase()
+          : (parsed || "").toLowerCase();
+      } catch {
+        catValue = catRaw.toLowerCase();
+      }
+
+      const match = name.includes(term) || desc.includes(term) || catValue.includes(term);
+
+      card.style.display = match ? "flex" : "none";
+      if (match) visibleCount++;
+    });
+
+    const counter = document.querySelector("[data-results-count]");
+    if (counter) {
+      counter.textContent = `Mostrando ${visibleCount} resultado${visibleCount !== 1 ? "s" : ""}`;
+    }
+
+    const sideInput = document.getElementById("product-search");
+    if (sideInput) sideInput.setAttribute("value", term);
+
+    grid.style.opacity = "1";
+    document.documentElement.classList.remove("has-search");
+  };
+
+  document.addEventListener("DOMContentLoaded", applySearchFilter);
+</script>

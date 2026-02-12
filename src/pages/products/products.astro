@@ -1,0 +1,225 @@
+---
+import Header from "../../layouts/Header.astro";
+import Footer from "../../layouts/Footer.astro";
+import MainLayout from "../../layouts/MainLayout.astro"; 
+
+const productCategories = [
+  { id: "antiedad",          label: "Antiedad",             image: "/Products/Antiedad/crema-de-recuperacion-micropeel.webp" },
+  { id: "limpiadores",       label: "Limpiadores",          image: "/Products/Limpiadores/LIMPIADOR-PROFUNDO-PARA-TODO-TIPO-DE-PIEL–SIN-SLS.webp" },
+  { id: "hiperpigmentacion", label: "Hiperpigmentación",    image: "/Products/Hiperpigmentacion/ACTIVADOR-BLANCO-LIQUIGEL.webp" },
+  { id: "hidratantes",       label: "Humectantes",          image: "/Products/Hidratantes/HIDRATANTE-ACTIVO-PARA-PIEL-MUY-SECA.webp" },
+  { id: "otros",             label: "Otros",                image: "/Products/Otros/MAQUILLAJE-DIFUMINAR-Y-CORREGIR.webp" },
+  { id: "proteccion-solar",  label: "Protección solar",     image: "/Products/Proteccion-solar/CLEAR-SOFT-SPF-50-M-PREVENT.webp" },
+  { id: "acne",              label: "Acné",                 image: "/Products/Acne/ACNE-BIO-TREAT-GEL.webp" },
+];
+---
+
+<MainLayout title="Productos | Alvit Eclat | Cuidado de la Piel">
+  <Header />
+  
+  {/* TÍTULO RESPONSIVE */}
+  <section class="max-w-7xl mx-auto pt-8 sm:pt-12 md:pt-16 pb-3 sm:pb-4 px-4 sm:px-6">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold text-left text-zinc-900">
+      Categoría de productos
+    </h1>
+  </section>
+
+  {/* CARRUSEL DE CATEGORÍAS RESPONSIVE */}
+  <section class="max-w-7xl mx-auto pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
+    <div class="relative">
+      <button
+        type="button"
+        id="cat-prev"
+        class="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 xl:-translate-x-6 z-10
+              w-9 h-9 xl:w-10 xl:h-10 rounded-full bg-pink-700 text-white items-center justify-center shadow-lg
+              hover:bg-pink-800 transition-all hover:scale-110"
+        aria-label="Ver categorías anteriores"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <div
+        id="cat-track"
+        class="products-cat-track flex gap-4 sm:gap-6 md:gap-10 lg:gap-16 overflow-x-auto scroll-smooth 
+               px-2 sm:px-4 md:px-8 lg:px-10 py-4 sm:py-5 md:py-6
+               snap-x snap-mandatory"
+      >
+        {productCategories.map((cat) => (
+          <a
+            href={`/products/${cat.id}`}
+            class="group inline-flex flex-col items-center gap-3 sm:gap-4 md:gap-6 shrink-0 
+                   w-32 xs:w-36 sm:w-44 md:w-52 lg:w-60
+                   snap-center"
+          >
+            <div class="category-card-image w-full aspect-[3/4] flex items-center justify-center overflow-hidden rounded-lg">
+              <img
+                src={cat.image}
+                alt={cat.label}
+                class="h-full w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
+            
+            <span class="text-xs sm:text-sm md:text-base font-medium text-zinc-900 
+                         group-hover:text-pink-700 transition-colors text-center
+                         line-clamp-2">
+              {cat.label}
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        id="cat-next"
+        class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 xl:translate-x-6 z-10
+               w-9 h-9 xl:w-10 xl:h-10 rounded-full bg-pink-700 text-white items-center justify-center shadow-lg
+               hover:bg-pink-800 transition-all hover:scale-110"
+        aria-label="Ver más categorías"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex lg:hidden justify-center mt-4 gap-1.5">
+      {productCategories.map((_, index) => (
+        <div 
+          class="scroll-indicator w-1.5 h-1.5 rounded-full bg-zinc-300 transition-all duration-300"
+          data-index={index}
+        ></div>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</MainLayout>
+
+<style>
+  .products-cat-track {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .products-cat-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .category-card-image img {
+      transition: transform 0.35s ease;
+      transform-origin: center;
+    }
+
+    .group:hover .category-card-image img {
+      transform: scale(1.06);
+    }
+  }
+
+  .scroll-indicator.active {
+    background-color: #be185d;
+    width: 1.25rem;
+  }
+
+  @media (min-width: 375px) {
+    .xs\:w-36 { width: 9rem; }
+  }
+</style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const track = document.getElementById("cat-track");
+    const prev = document.getElementById("cat-prev");
+    const next = document.getElementById("cat-next");
+    const indicators = document.querySelectorAll(".scroll-indicator");
+
+    if (track) {
+      function updateIndicators() {
+        if (window.innerWidth >= 1024) return;
+
+        const scrollLeft = track.scrollLeft;
+        const itemWidth = track.children[0]?.offsetWidth || 0;
+        const gap = 16;
+        const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+
+        indicators.forEach((indicator, index) => {
+          if (index === currentIndex) indicator.classList.add("active");
+          else indicator.classList.remove("active");
+        });
+      }
+
+      track.addEventListener("scroll", updateIndicators);
+      updateIndicators();
+      window.addEventListener("resize", updateIndicators);
+
+      if (prev && next) {
+        function getStepSize() {
+          if (window.innerWidth >= 1024) return 260 * 2;
+          if (window.innerWidth >= 768) return 220 * 2;
+          return 150;
+        }
+
+        prev.addEventListener("click", () => {
+          track.scrollBy({ left: -getStepSize(), behavior: "smooth" });
+        });
+
+        next.addEventListener("click", () => {
+          track.scrollBy({ left: getStepSize(), behavior: "smooth" });
+        });
+
+        function updateArrowsVisibility() {
+          if (window.innerWidth < 1024) return;
+
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          
+          if (track.scrollLeft <= 0) {
+            prev.style.opacity = "0.5";
+            prev.style.pointerEvents = "none";
+          } else {
+            prev.style.opacity = "1";
+            prev.style.pointerEvents = "auto";
+          }
+
+          if (track.scrollLeft >= maxScroll - 10) {
+            next.style.opacity = "0.5";
+            next.style.pointerEvents = "none";
+          } else {
+            next.style.opacity = "1";
+            next.style.pointerEvents = "auto";
+          }
+        }
+
+        track.addEventListener("scroll", updateArrowsVisibility);
+        window.addEventListener("resize", updateArrowsVisibility);
+        updateArrowsVisibility();
+      }
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      track.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          const itemWidth = track.children[0]?.offsetWidth || 0;
+          const gap = window.innerWidth < 640 ? 16 : window.innerWidth < 768 ? 24 : 40;
+          
+          if (diff > 0) track.scrollBy({ left: itemWidth + gap, behavior: "smooth" });
+          else track.scrollBy({ left: -(itemWidth + gap), behavior: "smooth" });
+        }
+      }
+    }
+  }
+</script>

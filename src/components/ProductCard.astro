@@ -1,0 +1,164 @@
+---
+interface Props {
+  product: {
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    howToUse: string;     
+    ingredients: string[] | string;  
+    image: string;
+  };
+}
+
+const { product } = Astro.props;
+
+const MAX_CHARS = 130;
+
+function truncate(text: string, max = MAX_CHARS) {
+  if (!text) return "";
+  if (text.length <= max) return text;
+
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return cut.slice(0, lastSpace > 0 ? lastSpace : max) + "...";
+}
+
+const shortDesc = truncate(product.description);
+const modalId = `modal-${product.id}`;
+
+// ✅ soporte para ambas keys (nueva y vieja)
+const howToUseText = (product.howToUse ?? "").trim();
+
+// ✅ ingredientes normalizados a string con viñetas
+const ingredientsBlock = (() => {
+  const ing = product.ingredients;
+  if (!ing) return "";
+  if (Array.isArray(ing)) return ing.map(i => `• ${i}`).join("\n");
+  return ing.trim();
+})();
+---
+
+<article class="group flex flex-col product-card">
+  <a href={`/product/${product.id}`} class="block mb-3">
+    <div class="product-card-image">
+      <img src={product.image} alt={product.name} loading="lazy" />
+    </div>
+  </a>
+
+  <div class="flex flex-col product-card-text">
+    <a href={`/product/${product.id}`} class="text-sm font-semibold text-zinc-900 mb-1">
+      {product.name}
+    </a>
+
+    <p class="text-xs text-gray-600 mb-2">
+      {shortDesc}
+    </p>
+
+    <button
+      class="text-xs font-semibold underline text-zinc-800 text-left w-fit hover:text-black"
+      onclick={`
+        const d = document.getElementById('${modalId}');
+        d?.showModal();
+        d.scrollTop = 0; // ✅ arranca arriba siempre
+      `}
+      type="button"
+    >
+      Más información
+    </button>
+  </div>
+
+  <dialog id={modalId} class="product-modal">
+    <div class="product-modal-content">
+      <button
+        class="product-modal-close"
+        onclick={`document.getElementById('${modalId}')?.close()`}
+        aria-label="Cerrar"
+        type="button"
+      >
+        ✕
+      </button>
+
+      <h2 class="text-lg font-bold mb-3">{product.name}</h2>
+
+      {/* Descripción */}
+      <h3 class="text-sm font-semibold mb-1">Descripción</h3>
+      <p class="text-sm text-gray-700 mb-4" style="white-space: pre-line;">
+        {product.description}
+      </p>
+
+      {/* ✅ Modo de uso */}
+      {howToUseText.length > 0 && (
+        <div class="mt-2 mb-4">
+          <h3 class="text-sm font-semibold mb-1">Modo de uso</h3>
+          <p class="text-sm text-gray-700" style="white-space: pre-line;">
+            {howToUseText}
+          </p>
+        </div>
+      )}
+
+      {/* ✅ Ingredientes / activos */}
+      {ingredientsBlock.length > 0 && (
+        <div class="mt-2">
+          <h3 class="text-sm font-semibold mb-1">Ingredientes / activos</h3>
+          <p class="text-sm text-gray-700" style="white-space: pre-line;">
+            {ingredientsBlock}
+          </p>
+        </div>
+      )}
+
+      {/* ✅ Imagen de iconos al final del modal */}
+      <div class="modal-badges">
+        <img 
+          src="/Products/ingredientes/ingredientes.jpg" 
+          alt="Características del producto"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </dialog>
+</article>
+
+<style>
+  /* Modal */
+  .product-modal::backdrop {
+    background: rgba(0,0,0,.45);
+  }
+  .product-modal {
+    border: none;
+    padding: 0;
+    border-radius: 16px;
+    max-width: 720px;
+    width: 94%;
+  }
+  .product-modal-content {
+    position: relative;
+    padding: 22px 22px 18px;
+    background: white;
+    border-radius: 16px;
+  }
+  .product-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ✅ Iconos informativos */
+  .modal-badges{
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+  }
+
+  .modal-badges img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
